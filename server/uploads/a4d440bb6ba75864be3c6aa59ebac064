@@ -1,0 +1,49 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        // List of correct words
+        String[] correctWords = {"environment", "always", "protect", "irreplaceable", "different", "absolutely", "greatest", "glory", "predictable", "flavor", "should"};
+        
+        // Read input string from standard input
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        
+        // Remove spaces from input string
+        input = input.replaceAll("\\s+", "");
+        
+        // Split input string into individual words
+        String[] inputWords = input.split("(?<=\\G.{2})");
+        
+        // List to store misspelled words
+        ArrayList<String> misspelledWords = new ArrayList<>();
+        
+        // Check if each input word is spelled correctly
+        for (String word : inputWords) {
+            boolean isCorrect = false;
+            for (String correctWord : correctWords) {
+                if (word.equalsIgnoreCase(correctWord)) {
+                    isCorrect = true;
+                    break;
+                }
+            }
+            if (!isCorrect) {
+                misspelledWords.add(word);
+            }
+        }
+        
+        // Print misspelled words
+        if (misspelledWords.size() == 0) {
+            System.out.println("All words are spelled correctly.");
+        } else {
+            System.out.println("The following words are misspelled:");
+            for (String word : misspelledWords) {
+                System.out.println(word);
+            }
+        }
+        
+        scanner.close();
+    }
+}
